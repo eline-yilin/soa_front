@@ -19,7 +19,7 @@ class inquiry extends My_Controller {
 	 */
 	public function index()
 	{
-		$request_url = 'product/list/format/json';
+		$request_url = 'inquiry/list/format/json';
 		$resp = my_api_request($request_url , $method = 'get', $param = array());
 		$resp = json_decode($resp,true);
 		if(isset($resp['error']))
@@ -43,7 +43,7 @@ class inquiry extends My_Controller {
 				$this->data
 		);
 	
-		$this->load->view('pages/product/list', $this->data);
+		$this->load->view('pages/inquiry/list', $this->data);
 		$this->load->view('templates/footer', $this->data);
 	}
 	public function detail()
