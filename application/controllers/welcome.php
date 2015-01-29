@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class Welcome extends CI_Controller {
+require APPPATH.'/libraries/My_Controller.php';
+class Welcome extends My_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,7 +19,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->view('templates/header',
+				$this->data
+		);
+		
 		$this->load->view('welcome_message');
+		$this->load->view('templates/footer', $this->data);
 	}
 }
 

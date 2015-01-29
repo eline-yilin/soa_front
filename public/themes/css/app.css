@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 body
-{font-size:22px;}
+{font-size:16px;}
 .my-circle{border-radius:50%;}
 .my-red{background:red;color:#fff;}
 .my-orange{background:#ee7337;color:#fff;}
@@ -19,7 +19,8 @@ body
 	background-color: #ee7337;
     color: #fff;
 }
-.nav-pills > li{margin:0px 2%;}
+.nav-pills > li{margin:0px 1%;}
+
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     
     background-color: #ee7337;
@@ -83,3 +84,7 @@ body
 .panel-body .description .row{margin:3px 0px;}
 .product-item .panel-body .img img{width:100%;}
 .list-main .row{margin:8px 0px;min-height:30px;}
+.navbar li .account-operations a {
+font-size: 0.7em;
+padding: 0 !important;
+}

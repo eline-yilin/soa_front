@@ -26,6 +26,21 @@ abstract class My_Controller extends CI_Controller
 
     protected $data = array();
 
+    protected function uploadImg($input_name, &$error){
+    	if ( ! $this->upload->do_upload($input_name))
+    	{
+    		$error = $this->upload->display_errors();
+    		return  false;
+    	}
+    	else
+    	{
+    		$this->data['upload_data'] = $this->upload->data();
+    		$filepath = $this->data['upload_data']['file_name'];
+    		return $filepath;
+    
+    		//$this->load->view('upload_success', $this->data);
+    	}
+    }
 
     /**
      * Constructor function
@@ -48,18 +63,24 @@ abstract class My_Controller extends CI_Controller
         $current_url = $router . '/' . $action;
         //$this->session->unset_userdata('user');
         $current_user = $this->session->userdata('user');
-        
+        $exception_arr = array(
+        		'user/login',
+        		'user/register',
+        		'welcome/index'
+        		
+        );
+        if(!in_array($current_url , $exception_arr)){
+        	$this->session->set_userdata('current_url', uri_string());
+        }
         if(!$current_user 
-        		&& strtolower( $current_url) != 'user/login'  
-        		&& strtolower( $current_url) != 'user/register'){
-        	//redirect('../user/login', 'refresh');
+        		&& !in_array($current_url , $exception_arr)){
+        	redirect('../user/login', 'refresh');
         }
         else
         {
-        	//$this->data['user'] = $current_user;
+        	$this->data['user'] = $current_user;
         }
         
-
     }
 
 
