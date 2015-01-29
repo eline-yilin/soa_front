@@ -96,13 +96,24 @@ function showContent(id){
 }
 
 function generateTemplate(){
+	var rows = 5;
 var greeting = $('input.greeting_id:checked').val();
+if(greeting && typeof greeting != undefined)
+{
+	rows++;
+	greeting +='&#13';
+}
+else
+{
+	greeting = '';
+}
 var questions = '';
 $('input.question_id:checked').each(function(){
+	rows++;
 	questions +=  $(this).val() + '&#13';
 });
-var html = '' + greeting + '&#13' + questions ;
-$('#template-content').html(html);
+var html = '' + greeting  + questions ;
+$('#template-content').html(html).attr('rows',rows);
 $('#template-container').fadeIn();
 }
 	       </script>
