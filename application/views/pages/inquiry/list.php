@@ -1,3 +1,49 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.js"></script>
+<div id="inquiry_content" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Choose content</h4>
+            </div>
+            <div class="modal-body">
+               <div>Choose questions</div>
+               <div id='question-list'></div>
+               <div>Choose greeting</div>
+               <div id='greeting-list'></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"onclick='javascript:generateTemplate();'><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('submit'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+                
+<div id="template_content" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Template content</h4>
+            </div>
+            <div class="modal-body">
+              
+               <div id='template-content'></div>
+              
+            </div>
+            <div class="modal-footer">
+            
+            	<button id='copy-button' type="button" class="btn btn-primary"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copy'); ?></button>
+                <button id='copy-button_text' type="button" class="btn btn-primary hidden"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copyword'); ?></button>
+               
+                <a href='mailto:clientemail?subject=query'><button type="button" class="btn btn-primary" ><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('sendemail'); ?></button></a>
+           		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+               
 <div class="container-fluid">
 	    <div class='product-list'>
 	    <?php 
@@ -28,32 +74,12 @@ $html = '<div class="list-item ">' . $this->lang->line('createinquiry') .
 	       ?>
 	      
 	    </div>
-   
-   		<div class='product-list' id='greeting-container' style='display:none'>
-   			<div>Greeting</div>
-   			<div id='greeting-list'></div>
-   		</div>
    		
-   		<div class='product-list' id='question-container' style='display:none'>
-   			<div>Inquiry</div>
-   			<div id='question-list'></div>
-   		</div>
-   		
-   		<div class='product-list' id='template-container' style='display:none'>
-   			<div>Template</div>
-   			<textarea  cols='60' rows='20' id='template-content'></textarea>
-   		</div>
-   		
-   		<div class="control-group">
-          <!-- Button -->
-          <div class="controls">
-            <button id='submit' type='button' class="btn btn-success" onclick='javascript:generateTemplate();'><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('submit'); ?></button>
-          </div>
-        </div>
 	</div>
 	
     </div>
 <script>
+	     
 function showContent(id){
 	$.ajax({
 		url: "ajax",
@@ -77,7 +103,7 @@ function showContent(id){
 							qid
 					   + '"  />' + question +  '</label></div>');
 					})
-					$('#question-container').fadeIn();
+					
 			}
 			if(greetings)
 			{
@@ -88,8 +114,9 @@ function showContent(id){
 							gid
 					   + '"  />' + greeting +  '</label></div>');
 					})
-					$('#greeting-container').fadeIn();
+					
 			}
+			$("#inquiry_content").modal('show');
 		});	
 		
 	
@@ -98,22 +125,55 @@ function showContent(id){
 function generateTemplate(){
 	var rows = 5;
 var greeting = $('input.greeting_id:checked').val();
+var newline = '<br>';
 if(greeting && typeof greeting != undefined)
 {
 	rows++;
-	greeting +='&#13';
+	greeting +=newline;
 }
 else
 {
 	greeting = '';
 }
-var questions = '';
+var questions = '<ul>';
 $('input.question_id:checked').each(function(){
 	rows++;
-	questions +=  $(this).val() + '&#13';
+	questions +=  '<li>' + $(this).val() + '</li>';
 });
+questions += '</ul>';
 var html = '' + greeting  + questions ;
-$('#template-content').html(html).attr('rows',rows);
-$('#template-container').fadeIn();
+$('#template-content').html(html);
+//.attr('rows',rows);
+ $('#inquiry_content').modal('hide');
+$("#template_content").modal('show');
 }
+
+	
+	ZeroClipboard.config( { swfPath: "<?php echo $this->config->item( 'base_theme_url');?>js/ZeroClipboard.swf" } );
+	var client_text = new ZeroClipboard( document.getElementById("copy-button_text"));
+	var client = new ZeroClipboard( document.getElementById("copy-button"),{
+		//swfPath: "https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf" 
+		} );
+
+	client.on( "ready", function( readyEvent ) {
+	   //alert( "ZeroClipboard SWF is ready!" );
+
+		client.on( 'copy', function(event) {
+	          event.clipboardData.setData('text/html', $('#template-content').html());
+	          //client.setRichText("application/rtf" , $('#template-content').html());
+	        } );
+
+	        client.on( 'aftercopy', function(event) {
+	          //console.log('Copied text to clipboard: ' + event.data['text/plain']);
+	        } );
+	} );
+
+	client_text.on( "ready", function( readyEvent ) {
+		   //alert( "ZeroClipboard SWF is ready!" );
+
+			client_text.on( 'copy', function(event) {
+		          event.clipboardData.setData('text/plain', $('#template-content').html());
+		          //client.setRichText("application/rtf" , $('#template-content').html());
+		        } );
+		} );
 	       </script>

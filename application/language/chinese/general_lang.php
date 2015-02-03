@@ -19,9 +19,9 @@ $lang['uploadimage']			= "上传图片";
 $lang['login']			= "登录";
 $lang['register']			= "注册";
 $lang['logout']			= "登出";
-$lang['uploadimage']			= "上传图片";
-$lang['uploadimage']			= "上传图片";
-$lang['uploadimage']			= "上传图片";
+$lang['copy']			= "复制";
+$lang['copyword']			= "复制文本";
+$lang['sendemail']			= "发送邮件";
 
 /* End of file calendar_lang.php */
 /* Location: ./system/language/english/calendar_lang.php */
