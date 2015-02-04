@@ -19,7 +19,6 @@
         </div>
     </div>
 </div>
- <button id='copy-button1' type="button" class="btn btn-primary"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copy'); ?></button>
                               
 <div id="template_content" class="modal fade">
     <div class="modal-dialog">
