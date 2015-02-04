@@ -19,7 +19,8 @@
         </div>
     </div>
 </div>
-                
+ <button id='copy-button1' type="button" class="btn btn-primary"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copy'); ?></button>
+                              
 <div id="template_content" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -79,7 +80,20 @@ $html = '<div class="list-item ">' . $this->lang->line('createinquiry') .
 	
     </div>
 <script>
-	     
+(function($) {
+	  var proto = $.fn.modal.Constructor.prototype;
+	  // Aggregious hack
+	  proto.enforceFocus = function () {
+	    var that = this;
+	    $(document).on('focusin.modal', function (e) {
+	      if (that.$element[0] !== e.target &&
+	          !that.$element.has(e.target).length &&
+	          !$(e.target).closest('.global-zeroclipboard-container').length) {
+	        that.$element.focus();
+	      }
+	    });
+	  };
+	})(window.jQuery);    
 function showContent(id){
 	$.ajax({
 		url: "ajax",
@@ -159,11 +173,14 @@ $("#template_content").modal('show');
 	   //alert( "ZeroClipboard SWF is ready!" );
 
 		client.on( 'copy', function(event) {
+			alert('Copied text to clipboard');
+			//alert('copying');
 	          event.clipboardData.setData('text/html', $('#template-content').html());
 	          //client.setRichText("application/rtf" , $('#template-content').html());
 	        } );
 
 	        client.on( 'aftercopy', function(event) {
+		       // alert('Copied text to clipboard');
 	          //console.log('Copied text to clipboard: ' + event.data['text/plain']);
 	        } );
 	} );
@@ -172,6 +189,7 @@ $("#template_content").modal('show');
 		   //alert( "ZeroClipboard SWF is ready!" );
 
 			client_text.on( 'copy', function(event) {
+				alert('Copied text to clipboard');
 		          event.clipboardData.setData('text/plain', $('#template-content').html());
 		          //client.setRichText("application/rtf" , $('#template-content').html());
 		        } );
