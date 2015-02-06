@@ -11,6 +11,8 @@
                <div id='question-list'></div>
                <div>Choose greeting</div>
                <div id='greeting-list'></div>
+               <div>Choose ending</div>
+               <div id='ending-list'></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -107,6 +109,7 @@ function showContent(id){
 				return false;
 			var questions =  data.questions;
 			var greetings =  data.greetings;
+			var endings =  data.endings;
 			if(questions)
 			{
 				$.each(questions,function(index,value){
@@ -129,6 +132,17 @@ function showContent(id){
 					})
 					
 			}
+			if(endings)
+			{
+				$.each(endings,function(index,value){
+					var content = value['content'];
+					var id = value['id'];
+					$('#ending-list').append('<div><label><input type="checkbox" value="' + content + '" class="ending_id" name="ending_id" id="ending_' + 
+							id
+					   + '"  />' + content +  '</label></div>');
+					})
+					
+			}
 			$("#inquiry_content").modal('show');
 		});	
 		
@@ -148,13 +162,19 @@ else
 {
 	greeting = '';
 }
-var questions = '<ul>';
+var questions = '<ul style="font-weight:bold;">';
 $('input.question_id:checked').each(function(){
 	rows++;
 	questions +=  '<li>' + $(this).val() + '</li>';
 });
 questions += '</ul>';
-var html = '' + greeting  + questions ;
+
+var endings =  newline;
+$('input.ending_id:checked').each(function(){
+	rows++;
+	endings +=  ' ' + $(this).val() + '';
+});
+var html = '' + greeting  + questions + endings;
 $('#template-content').html(html);
 //.attr('rows',rows);
  $('#inquiry_content').modal('hide');
