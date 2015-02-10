@@ -303,6 +303,11 @@ class user extends My_Controller {
 	
 	}
 	
+	public function logout()
+	{
+		$this->session->unset_userdata('user');
+		redirect('../welcome', 'refresh');
+	}
 	
 }
 
