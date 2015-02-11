@@ -105,6 +105,7 @@ function showContent(id){
 		}).done(function(data){
 			$('#question-list').html('');
 			$('#greeting-list').html('');
+			$('#ending-list').html('');
 			if(!data)
 				return false;
 			var questions =  data.questions;
@@ -164,15 +165,23 @@ else
 }
 var questions = '<ul style="font-weight:bold;">';
 $('input.question_id:checked').each(function(){
-	rows++;
-	questions +=  '<li>' + $(this).val() + '</li>';
+	
+	var value = $(this).val();
+	if(value){
+		rows++;
+		questions +=  '<li>' + value + '</li>';
+	}
 });
 questions += '</ul>';
 
 var endings =  newline;
 $('input.ending_id:checked').each(function(){
-	rows++;
-	endings +=  ' ' + $(this).val() + '';
+	
+	var value = $(this).val();
+	if(value){
+		rows++;
+		endings +=  ' ' + value + '';
+	}
 });
 var html = '' + greeting  + questions + endings;
 $('#template-content').html(html);
