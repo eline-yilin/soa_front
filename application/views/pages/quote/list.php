@@ -49,37 +49,52 @@
 <div class="container-fluid">
 	    <div class='product-list'>
 	    <?php 
-	    if(isset($error)){
-	    	//var_dump($error);
-	    }
-	    else{
-	    	
-	    	
-$html = '<div class="list-item ">' . $this->lang->line('createinquiry') .
-	    		
-'</div>
- <div class="list-item ">' .  $this->lang->line('choose') .  $this->lang->line('product_type')
+	    if(isset($error)):?>
+	    <?php else:?>
+			<div class="list-item ">  <?php echo $this->lang->line('create') , $this->lang->line($router);  ?> </div>
+			 	<div class="list-item panel panel-warning">
+				      <div class="panel-body">
+				         	<div class="form-group">
+					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('agent');?> </label>
+					             <select class="form-control required"  name= "agent" id="agent">
+										<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>
+										<?php foreach($items as $product):?>   
+											  <option value="<?php echo $product['id'] ; ?>">
+													<?php echo $product['name'];?>
+											 </option>
+								       <?php endforeach;?>
+						      	</select>
+					      </div><!-- close agent -->
+					      <div class="form-group">
+					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('client');?>  </label>
+					             <select class="form-control required"  name= "client" id="client">
+										<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>
+						      	</select>
+					      </div><!-- close client -->
+				     </div>
+			  	</div>
+			  	<div class="list-item panel panel-warning">
+				      <div class="panel-body">
+				         	<div class="form-group">
+					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('content');?>  </label>
+					             <textarea class="form-control required"  name= "content" id="content">
+										
+						      	</textarea>
+					      </div>
+					      <div class="form-group">
+					      	<button id='copy-button_text_out' type="button" class="btn btn-primary"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copy'); ?></button>
+                  		  </div>
+				     </div>
+			  	</div>
+			  	
+		  </div>
+		<?php endif;?>
 
-.'</div>'
- 		. '  <div class="list-item panel panel-warning">
-	       		<div class="panel-body">';
-	
-	    	
-	    foreach($items as $product):?>   
-				   <?php  $html .= '<div><label><input type="radio" name="product_type" id="type_' . 
-						   $product['id']
-				   .'"  onclick="javascript: showContent(' .  $product['id'] . ')" />' .  $product['name'] . '</label></div>';?>
-	       <?php endforeach;}
-	       $html .= '</div>
-	       </div>';
-	       echo $html;
-	       ?>
-	      
 	    </div>
    		
 	</div>
 	
-    </div>
+
 <script>
 (function($) {
 	  var proto = $.fn.modal.Constructor.prototype;
@@ -94,59 +109,47 @@ $html = '<div class="list-item ">' . $this->lang->line('createinquiry') .
 	      }
 	    });
 	  };
-	})(window.jQuery);    
-function showContent(id){
+	})(window.jQuery);  
+$(document).ready(function(){
+	$('#agent').change(function(){
+			var id = $(this).val();
+			showClient(id);
+		});
+	$('#client').change(function(){
+		var id = $(this).val();
+		showContent(id);
+	});
+});	
+var content_arr = {};
+function showClient(id){
 	$.ajax({
+		async:false,
 		url: "ajax",
 		type: "POST",
-		data: { 'url':'inquiry/detail/id/' + id + '/format/json' ,
+		data: { 'url':'quote/detail/id/' + id + '/format/json' ,
 			'method': 'get'},
 		dataType: "json"
 		}).done(function(data){
-			$('#question-list').html('');
-			$('#greeting-list').html('');
-			$('#ending-list').html('');
 			if(!data)
 				return false;
-			var questions =  data.questions;
-			var greetings =  data.greetings;
-			var endings =  data.endings;
-			if(questions)
+			var html = '<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>';
+			$.each(data['clients'],function(index,item){
+				html += "<option value='" + item['id'] + "'>" + item['name'] + "</option>";
+				});
+			$('#client').html(html);
+			content_arr = data['clients'];
+			});
+}  
+function showContent(id){
+	$.each(content_arr,function(index,item){
+			if(item['id'] == id)
 			{
-				$.each(questions,function(index,value){
-					var question = value['question'];
-					var qid = value['id'];
-					$('#question-list').append('<div><label><input type="checkbox" value="' + question + '" class="question_id" name="question_id_' + qid + '" id="question_' + 
-							qid
-					   + '"  />' + question +  '</label></div>');
-					})
-					
+				$('#content').val(item['content']);
+				//$("#inquiry_content").modal('show');
+				return false;
 			}
-			if(greetings)
-			{
-				$.each(greetings,function(index,value){
-					var greeting = value['content'];
-					var gid = value['id'];
-					$('#greeting-list').append('<div><label><input type="radio" value="' + greeting + '" class="greeting_id" name="greeting_id" id="greeting_' + 
-							gid
-					   + '"  />' + greeting +  '</label></div>');
-					})
-					
-			}
-			if(endings)
-			{
-				$.each(endings,function(index,value){
-					var content = value['content'];
-					var id = value['id'];
-					$('#ending-list').append('<div><label><input type="checkbox" value="' + content + '" class="ending_id" name="ending_id" id="ending_' + 
-							id
-					   + '"  />' + content +  '</label></div>');
-					})
-					
-			}
-			$("#inquiry_content").modal('show');
-		});	
-		
+		});
+			
 	
 }
 
@@ -192,7 +195,7 @@ $("#template_content").modal('show');
 
 	
 	ZeroClipboard.config( { swfPath: "<?php echo $this->config->item( 'base_theme_url');?>js/ZeroClipboard.swf" } );
-	var client_text = new ZeroClipboard( document.getElementById("copy-button_text"));
+	var client_text = new ZeroClipboard( document.getElementById("copy-button_text_out"));
 	var client = new ZeroClipboard( document.getElementById("copy-button"),{
 		//swfPath: "https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf" 
 		} );
@@ -218,7 +221,7 @@ $("#template_content").modal('show');
 
 			client_text.on( 'copy', function(event) {
 				alert('Copied text to clipboard');
-		          event.clipboardData.setData('text/plain', $('#template-content').html());
+		          event.clipboardData.setData('text/plain', $('#content').val());
 		          //client.setRichText("application/rtf" , $('#template-content').html());
 		        } );
 		} );

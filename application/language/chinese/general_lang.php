@@ -22,6 +22,26 @@ $lang['logout']			= "登出";
 $lang['copy']			= "复制";
 $lang['copyword']			= "复制文本";
 $lang['sendemail']			= "发送邮件";
-
+$lang['create']			= "新建";
+$lang['quote']			= "quote";
+$lang['agent']			= "agent";
+$lang['client']			= "client";
+$lang['content']			= "content";
+$lang['please']			= "请";
+$lang['select']			= "选择";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
+$lang['']			= "";
 /* End of file calendar_lang.php */
 /* Location: ./system/language/english/calendar_lang.php */
