@@ -42,7 +42,7 @@
 			    </a>
 			    <ul class="dropdown-menu" role="menu">
 			      <li><a href='<?php echo $this->config->item( 'base_url');?>inquiry'>Inquiry Partials</a></li>
-			      <li><a href='<?php echo $this->config->item( 'base_url');?>inquiry'>Quote Partials</a></li>
+			      <li><a href='<?php echo $this->config->item( 'base_url');?>quote'>Quote Partials</a></li>
 			    </ul>
 			  </li>
            <?php else:?>
