@@ -1,28 +1,5 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.js"></script>
-<div id="inquiry_content" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Choose content</h4>
-            </div>
-            <div class="modal-body">
-               <div>Choose questions</div>
-               <div id='question-list'></div>
-               <div>Choose greeting</div>
-               <div id='greeting-list'></div>
-               <div>Choose ending</div>
-               <div id='ending-list'></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary"onclick='javascript:generateTemplate();'><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('submit'); ?></button>
-            </div>
-        </div>
-    </div>
-</div>
-                              
-<div id="template_content" class="modal fade">
+ <div id="template_content" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,14 +15,11 @@
             
             	<button id='copy-button' type="button" class="btn btn-primary"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copy'); ?></button>
                 <button id='copy-button_text' type="button" class="btn btn-primary hidden"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copyword'); ?></button>
-               
-                <a href='mailto:clientemail?subject=query'><button type="button" class="btn btn-primary" ><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('sendemail'); ?></button></a>
-           		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
-               
+</div>            
 <div class="container-fluid">
 	    <div class='product-list'>
 	    <?php 
@@ -71,19 +45,6 @@
 										<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>
 						      	</select>
 					      </div><!-- close client -->
-				     </div>
-			  	</div>
-			  	<div class="list-item panel panel-warning">
-				      <div class="panel-body">
-				         	<div class="form-group">
-					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('content');?>  </label>
-					             <textarea class="form-control required"  name= "content" id="content">
-										
-						      	</textarea>
-					      </div>
-					      <div class="form-group">
-					      	<button id='copy-button_text_out' type="button" class="btn btn-primary"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copy'); ?></button>
-                  		  </div>
 				     </div>
 			  	</div>
 			  	
@@ -144,8 +105,8 @@ function showContent(id){
 	$.each(content_arr,function(index,item){
 			if(item['id'] == id)
 			{
-				$('#content').val(item['content']);
-				//$("#inquiry_content").modal('show');
+				$('#template-content').html('<pre>' + item['content'] + '</pre>');
+				$("#template_content").modal('show');
 				return false;
 			}
 		});
@@ -195,7 +156,7 @@ $("#template_content").modal('show');
 
 	
 	ZeroClipboard.config( { swfPath: "<?php echo $this->config->item( 'base_theme_url');?>js/ZeroClipboard.swf" } );
-	var client_text = new ZeroClipboard( document.getElementById("copy-button_text_out"));
+	//var client_text = new ZeroClipboard( document.getElementById("copy-button_text_out"));
 	var client = new ZeroClipboard( document.getElementById("copy-button"),{
 		//swfPath: "https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf" 
 		} );
@@ -216,7 +177,7 @@ $("#template_content").modal('show');
 	        } );
 	} );
 
-	client_text.on( "ready", function( readyEvent ) {
+	/* client_text.on( "ready", function( readyEvent ) {
 		   //alert( "ZeroClipboard SWF is ready!" );
 
 			client_text.on( 'copy', function(event) {
@@ -224,5 +185,7 @@ $("#template_content").modal('show');
 		          event.clipboardData.setData('text/plain', $('#content').val());
 		          //client.setRichText("application/rtf" , $('#template-content').html());
 		        } );
-		} );
+		} ); */
 	       </script>
+
+	       
