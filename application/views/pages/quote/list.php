@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
               
-               <div id='template-content'></div>
+               <div id='template-content' style='height:85%;'></div>
               
             </div>
             <div class="modal-footer">
@@ -80,6 +80,13 @@ $(document).ready(function(){
 		var id = $(this).val();
 		showContent(id);
 	});
+	$('#template_content').on('show.bs.modal', function () {
+ 	   
+   	    $('.modal .modal-body').css('overflow-y', 'auto'); 
+   	    $('.modal .modal-body').css('max-height', $(window).height() *0.7);
+   	 	$('.modal .modal-body').css('height', $(window).height() *0.7);
+   	 	
+   	});
 });	
 var content_arr = {};
 function showClient(id){
@@ -114,45 +121,7 @@ function showContent(id){
 	
 }
 
-function generateTemplate(){
-	var rows = 5;
-var greeting = $('input.greeting_id:checked').val();
-var newline = '<br>';
-if(greeting && typeof greeting != undefined)
-{
-	rows++;
-	greeting +=newline;
-}
-else
-{
-	greeting = '';
-}
-var questions = '<ul style="font-weight:bold;">';
-$('input.question_id:checked').each(function(){
-	
-	var value = $(this).val();
-	if(value){
-		rows++;
-		questions +=  '<li>' + value + '</li>';
-	}
-});
-questions += '</ul>';
 
-var endings =  newline;
-$('input.ending_id:checked').each(function(){
-	
-	var value = $(this).val();
-	if(value){
-		rows++;
-		endings +=  ' ' + value + '';
-	}
-});
-var html = '' + greeting  + questions + endings;
-$('#template-content').html(html);
-//.attr('rows',rows);
- $('#inquiry_content').modal('hide');
-$("#template_content").modal('show');
-}
 
 	
 	ZeroClipboard.config( { swfPath: "<?php echo $this->config->item( 'base_theme_url');?>js/ZeroClipboard.swf" } );
