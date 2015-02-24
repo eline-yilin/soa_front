@@ -99,7 +99,7 @@ function showContent(id){
 	$.ajax({
 		url: "ajax",
 		type: "POST",
-		data: { 'url':'inquiry/detail/id/' + id + '/format/json' ,
+		data: { 'url':'<?php echo $router;?>/detail/id/' + id + '/format/json' ,
 			'method': 'get'},
 		dataType: "json"
 		}).done(function(data){
