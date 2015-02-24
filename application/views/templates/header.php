@@ -43,6 +43,10 @@
 			    <ul class="dropdown-menu" role="menu">
 			      <li><a href='<?php echo $this->config->item( 'base_url');?>inquiry'>Inquiry Partials</a></li>
 			      <li><a href='<?php echo $this->config->item( 'base_url');?>quote'>Quote Partials</a></li>
+			      <li><a href='<?php echo $this->config->item( 'base_url');?>awb'>AWB Partials</a></li>
+			  	  <li><a href='<?php echo $this->config->item( 'base_url');?>cost'>Cost Partials</a></li>
+			  	  <li><a href='<?php echo $this->config->item( 'base_url');?>status'>Status Partials</a></li>
+			  
 			    </ul>
 			  </li>
            <?php else:?>
