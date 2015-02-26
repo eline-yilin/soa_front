@@ -89,7 +89,7 @@ $(document).ready(function(){
 	});
 	$('#file').change(function(){
 		var file = $(this).find('option:selected').text();
-		var cdn_url = "/work/soa_api/public/upload/resource/";
+		var cdn_url = "<?php echo $this->config->item( 'cdn_url')?>upload/resource/";
 		var url = cdn_url + file;
 		window.open(url);
 		//window.location.href = "http://localhost/work/soa_api/public/upload/resource/" + file; 
