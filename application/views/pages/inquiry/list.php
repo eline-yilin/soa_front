@@ -7,10 +7,10 @@
                 <h4 class="modal-title">Choose content</h4>
             </div>
             <div class="modal-body">
-               <div>Choose questions</div>
-               <div id='question-list'></div>
                <div>Choose greeting</div>
                <div id='greeting-list'></div>
+                <div>Choose questions</div>
+               <div id='question-list'></div>
                <div>Choose ending</div>
                <div id='ending-list'></div>
             </div>
@@ -55,9 +55,7 @@
 	    else{
 	    	
 	    	
-$html = '<div class="list-item ">' . $this->lang->line('createinquiry') .
-	    		
-'</div>
+$html = '
  <div class="list-item ">' .  $this->lang->line('choose') .  $this->lang->line('product_type')
 
 .'</div>'
@@ -138,7 +136,7 @@ function showContent(id){
 				$.each(endings,function(index,value){
 					var content = value['content'];
 					var id = value['id'];
-					$('#ending-list').append('<div><label><input type="checkbox" value="' + content + '" class="ending_id" name="ending_id" id="ending_' + 
+					$('#ending-list').append('<div><label><input type="radio" value="' + content + '" class="ending_id" name="ending_id" id="ending_' + 
 							id
 					   + '"  />' + content +  '</label></div>');
 					})
