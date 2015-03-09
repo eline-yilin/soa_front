@@ -55,8 +55,7 @@
 	    else{
 	    	
 	    	
-$html = '<div class="list-item ">' . $this->lang->line('create') . 
-$this->lang->line($router) .
+$html = '<div class="list-item ">' .  $this->lang->line('please') .  $this->lang->line('select') . $this->lang->line($router . '_name') .
 '</div>
  <div class="list-item ">' .  $this->lang->line('choose') .  $this->lang->line('status_name')
 
