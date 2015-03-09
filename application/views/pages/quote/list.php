@@ -29,7 +29,7 @@
 			 	<div class="list-item panel panel-warning">
 				      <div class="panel-body">
 				         	<div class="form-group">
-					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('agent');?> </label>
+					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('please') ,  $this->lang->line('select') , $this->lang->line($router . '_name');  ?> </label>
 					             <select class="form-control required"  name= "agent" id="agent">
 										<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>
 										<?php foreach($items as $product):?>   

@@ -24,6 +24,7 @@ $lang['copyword']			= "复制文本";
 $lang['sendemail']			= "发送邮件";
 $lang['create']			= "新建";
 $lang['quote']			= "quote";
+$lang['quote_name']			= "代理及报价";
 $lang['agent']			= "agent";
 $lang['client']			= "client";
 $lang['content']			= "content";

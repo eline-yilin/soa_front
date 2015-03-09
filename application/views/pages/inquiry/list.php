@@ -58,6 +58,9 @@
 $html = '
  <div class="list-item ">' .  $this->lang->line('choose') .  $this->lang->line('product_type')
 
+.'</div>' .
+    		'<div class="list-item ">' .  $this->lang->line('choose') .  $this->lang->line('product_type')
+
 .'</div>'
  		. '  <div class="list-item panel panel-warning">
 	       		<div class="panel-body">';
