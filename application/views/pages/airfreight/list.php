@@ -25,11 +25,11 @@
 	    <?php 
 	    if(isset($error)):?>
 	    <?php else:?>
-			<div class="list-item ">  <?php echo $this->lang->line('create') , $this->lang->line($router);  ?> </div>
+			<div class="list-item ">  <?php echo $this->lang->line('please') ,  $this->lang->line('select') , $this->lang->line($router . '_name');  ?> </div>
 			 	<div class="list-item panel panel-warning">
 				      <div class="panel-body">
 				         	<div class="form-group">
-					         	 <label class="control-label" for="name"><?php echo $this->lang->line('airfreight');?> </label>
+					         	 <label class="control-label" for="name"><?php echo $this->lang->line($router);?> </label>
 					             <select class="form-control required"  name= "name" id="name">
 										<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>
 										<?php foreach($items as $product):?>   

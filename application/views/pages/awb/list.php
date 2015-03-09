@@ -25,7 +25,7 @@
 	    <?php 
 	    if(isset($error)):?>
 	    <?php else:?>
-			<div class="list-item ">  <?php echo $this->lang->line('create') , $this->lang->line($router);  ?> </div>
+			<div class="list-item ">  <?php echo $this->lang->line('please') ,  $this->lang->line('select') , $this->lang->line($router . '_name');    ?> </div>
 			 	<div class="list-item panel panel-warning">
 				      <div class="panel-body">
 				         	<div class="form-group">
