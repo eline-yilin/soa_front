@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Template content</h4>
+                <h4 class="modal-title">AWB Instruction</h4>
             </div>
             <div class="modal-body">
               
@@ -25,7 +25,7 @@
 	    <?php 
 	    if(isset($error)):?>
 	    <?php else:?>
-			<div class="list-item ">  <?php echo $this->lang->line('please') ,  $this->lang->line('select') , $this->lang->line($router . '_name');    ?> </div>
+			<div class="list-item header">  <?php echo $this->lang->line('please') ,  $this->lang->line('select') , $this->lang->line($router . '_name');    ?> </div>
 			 	<div class="list-item panel panel-warning">
 				      <div class="panel-body">
 				         	<div class="form-group">

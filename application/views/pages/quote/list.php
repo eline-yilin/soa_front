@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Template content</h4>
+                <h4 class="modal-title">Quote Details</h4>
             </div>
             <div class="modal-body">
               
@@ -25,11 +25,11 @@
 	    <?php 
 	    if(isset($error)):?>
 	    <?php else:?>
-			
+			<div class="list-item header">  <?php echo $this->lang->line('please') ,  $this->lang->line('select') , $this->lang->line($router . '_name');    ?> </div>
 			 	<div class="list-item panel panel-warning">
 				      <div class="panel-body">
 				         	<div class="form-group">
-					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('please') ,  $this->lang->line('select') , $this->lang->line($router . '_name');  ?> </label>
+					         	 <label class="control-label" for="agent"><?php echo    $this->lang->line('agent_title');  ?> </label>
 					             <select class="form-control required"  name= "agent" id="agent">
 										<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>
 										<?php foreach($items as $product):?>   
@@ -40,7 +40,7 @@
 						      	</select>
 					      </div><!-- close agent -->
 					      <div class="form-group">
-					         	 <label class="control-label" for="agent"><?php echo $this->lang->line('client');?>  </label>
+					         	 <label class="control-label" for="agent"><?php echo  $this->lang->line('client_name');?>  </label>
 					             <select class="form-control required"  name= "client" id="client">
 										<option><?php echo $this->lang->line('please') ,  $this->lang->line('select') ;?></option>
 						      	</select>

@@ -1,4 +1,19 @@
-
+<div id="template_content" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">News Details</h4>
+            </div>
+            <div class="modal-body">
+              
+               <div id='template-content'></div>
+              
+            </div>
+           
+        </div>
+    </div>
+</div>
 <div class="container-fluid ">
 	    <div class='product-list'>
 	    <?php 
@@ -7,17 +22,18 @@
 	    }
 	    else{ foreach($items as $item):?>
 	       <div class="panel panel-warning" id = "item-<?php echo $item['id'];?>">
-	       		<div class="panel-heading"><?php echo $item['name']?></div>
+	       		
 	       		<div class="panel-body">
 				    <div class = 'row'>
-				    	<div class=" col-md-12 col-sm-12 col-xs-12">
-				    	 <pre><?php echo $item["content"];?></pre>  
+				    	<div class="col-lg-9 col-md-9 col-sm-8 col-xs-6">
+				    	<?php echo $item['name']?>
+				    	<div class='hidden hidden-content'><pre><?php echo $item["content"];?></pre> </div>
+				    	  
 				    	
 				    	</div>
-				    	<div class="hidden col-md-0 col-sm-0 col-xs-0 ">
-						    		<a href = '<?php echo $router;?>/update/id/<?php echo $item['id'] ;?>'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>  	
-				    	 			<button type='button' class="btn btn-danger btn-mini" onclick="javascript:removeItem(<?php echo $item['id'];?>);"><i class="icon-white icon-remove"></i>
-          		 						<?php echo $this->lang->line('delete') ; ?> 
+				    	<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+						    		<button type='button' class="btn btn-success btn-mini" onclick="javascript:showContent(<?php echo $item['id'];?>);"><i class="icon-white icon-remove"></i>
+          		 						<?php echo $this->lang->line('view_detail') ; ?> 
           		 					</button>
 				    	</div>
 				    </div>
@@ -28,23 +44,20 @@
 	    </div>
     </div>
 <script>
-	    function removeItem(id){
-			var yes = confirm("Are you sure you want to delete?");
-			if(!yes)
-			{
- 				return false;
-			}
-		    $.ajax({
-				url: "ajax",
-				type: "POST",
-				data: { 'url':'<?php echo $router;?>/detail/id/' + id + '/format/json' ,
-					'method': 'delete'},
-				dataType: "json"
-				}).done(function(data){
-					if(data)
-					{
-						$('#item-' + data).fadeOut().remove();
-						}
-					});
-	    }
+$(document).ready(function(){
+	
+	$('#template_content').on('show.bs.modal', function () {
+ 	   
+   	    $('.modal .modal-body').css('overflow-y', 'auto'); 
+   	    $('.modal .modal-body').css('max-height', $(window).height() *0.7);
+   	 	$('.modal .modal-body').css('height', $(window).height() *0.7);
+   	 	
+   	});
+});	
+function showContent(id){
+	var content = $('#item-' + id + ' .hidden-content').html();
+	$('#template_content #template-content').html(content);
+	$("#template_content").modal('show');
+	
+}
 </script>
