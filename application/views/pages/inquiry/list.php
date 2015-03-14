@@ -39,7 +39,7 @@
             	<button id='copy-button' type="button" class="btn btn-primary"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copy'); ?></button>
                 <button id='copy-button_text' type="button" class="btn btn-primary hidden"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('copyword'); ?></button>
                
-                <a href='mailto:clientemail?subject=query'><button type="button" class="btn btn-primary" ><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('sendemail'); ?></button></a>
+                <a class='hidden' href='mailto:clientemail?subject=query'><button type="button" class="btn btn-primary" ><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('sendemail'); ?></button></a>
            		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -114,7 +114,7 @@ function showContent(id){
 				$.each(questions,function(index,value){
 					var question = value['question'];
 					var qid = value['id'];
-					$('#question-list').append('<div><label><input type="checkbox" value="' + question + '" class="question_id" name="question_id_' + qid + '" id="question_' + 
+					$('#question-list').append('<div><label><input type="radio" value="' + question + '" class="question_id" name="question_id_' + qid + '" id="question_' + 
 							qid
 					   + '"  />' + question +  '</label></div>');
 					})
@@ -151,7 +151,7 @@ function showContent(id){
 function generateTemplate(){
 	var rows = 5;
 var greeting = $('input.greeting_id:checked').val();
-var newline = '<br>';
+var newline = '<div style="margin-bottom:10px;"></div>';
 if(greeting && typeof greeting != undefined)
 {
 	rows++;
@@ -161,18 +161,18 @@ else
 {
 	greeting = '';
 }
-var questions = '<ul style="font-weight:bold;">';
+var questions = '' ;// '<ul style="font-weight:bold;">';
 $('input.question_id:checked').each(function(){
 	
 	var value = $(this).val();
 	if(value){
 		rows++;
-		questions +=  '<li>' + value + '</li>';
+		questions +=  '<div>' + value + '</div>';
 	}
 });
-questions += '</ul>';
+questions += '';
 
-var endings =  newline;
+var endings =   newline;
 $('input.ending_id:checked').each(function(){
 	
 	var value = $(this).val();
