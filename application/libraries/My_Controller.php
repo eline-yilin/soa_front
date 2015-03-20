@@ -1,4 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
+include('log4php/Logger.php');
+
 
 /**
  * CodeIgniter Rest Controller
@@ -49,6 +51,13 @@ abstract class My_Controller extends CI_Controller
     public function __construct($config = 'rest')
     {
         parent::__construct();
+        
+//         Logger::configure('D:/e_work/soa_front/application/libraries/log4php/config.xml');
+        
+//         $logger = Logger::getLogger("main");
+//         $logger->info("This is an informational message.");
+//         $logger->warn("I'm not feeling so good...");
+        
         $this->load->helper('api');
         $this->lang->load('general', 'chinese');
         $this->load->library('session');
