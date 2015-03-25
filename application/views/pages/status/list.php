@@ -114,7 +114,7 @@ function showContent(id){
 				$.each(questions,function(index,value){
 					var question = value['question'];
 					var qid = value['id'];
-					$('#question-list').append('<div><label><input type="radio" value="' + question + '" class="question_id" name="question_id_' + qid + '" id="question_' + 
+					$('#question-list').append('<div><label><input type="radio" value="' + question + '" class="question_id" name="question_id_' + 1 + '" id="question_' + 
 							qid
 					   + '"  />' + question +  '</label></div>');
 					})

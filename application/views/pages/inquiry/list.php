@@ -114,7 +114,7 @@ function showContent(id){
 				$.each(questions,function(index,value){
 					var question = value['question'];
 					var qid = value['id'];
-					$('#question-list').append('<div><label><input type="radio" value="' + question + '" class="question_id" name="question_id_' + qid + '" id="question_' + 
+					$('#question-list').append('<div><label><input type="checkbox" value="' + question + '" class="question_id" name="question_id_' + qid + '" id="question_' + 
 							qid
 					   + '"  />' + question +  '</label></div>');
 					})
@@ -161,7 +161,7 @@ else
 {
 	greeting = '';
 }
-var questions = '' ;// '<ul style="font-weight:bold;">';
+var questions =  '<ul style="font-weight:bold;">';
 $('input.question_id:checked').each(function(){
 	
 	var value = $(this).val();
@@ -170,7 +170,7 @@ $('input.question_id:checked').each(function(){
 		questions +=  '<div>' + value + '</div>';
 	}
 });
-questions += '';
+questions += '</ul>';
 
 var endings =   newline;
 $('input.ending_id:checked').each(function(){
