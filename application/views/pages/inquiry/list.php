@@ -167,7 +167,7 @@ $('input.question_id:checked').each(function(){
 	var value = $(this).val();
 	if(value){
 		rows++;
-		questions +=  '<div>' + value + '</div>';
+		questions +=  '<li>' + value + '</li>';
 	}
 });
 questions += '</ul>';
