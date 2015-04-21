@@ -77,8 +77,8 @@
 				    </ul>
 				    <?php else :?>
 				    <div class='account-operations'>
-				    	<a href='user/login'><?php echo $this->lang->line('login'); ?> </a> | 
-				    	<a href='user/register'><?php echo $this->lang->line('register'); ?> </a>
+				    	<a href='<?php echo $this->config->item( 'base_url');?>user/login'><?php echo $this->lang->line('login'); ?> </a> | 
+				    	<a href='<?php echo $this->config->item( 'base_url');?>user/register'><?php echo $this->lang->line('register'); ?> </a>
 				    </div>
 				    <?php endif;?>
 				  </li>

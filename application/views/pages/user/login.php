@@ -22,7 +22,7 @@ echo form_open("../$router/$action", $attributes);
           <!-- category-->
 		  <label class="control-label" for="phone"><?php echo $this->lang->line('password'); ?></label>
           <div class="controls ">
-            <input type="text"  class="input-xlarge required" name='password' id='password' value=''>
+            <input type="password"  class="input-xlarge required" name='password' id='password' value=''>
           </div>
 
     <div class="control-group">

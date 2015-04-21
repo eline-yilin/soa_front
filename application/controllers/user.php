@@ -210,10 +210,17 @@ class user extends My_Controller {
 					$this->data['error'] = $resp['error'];
 					
 				}
-				else{
-					$this->data['resp'] = $resp;
-					$this->session->set_userdata('user', $resp);
-					redirect('../welcome', 'refresh');
+				else
+				{
+					if($resp['type'] != 'front' && $resp['type'] != 'all'){
+						$this->data['error'] = '没有合适权限';
+					}
+					else{
+						$this->data['resp'] = $resp;
+						$this->session->set_userdata('user', $resp);
+						redirect('../welcome', 'refresh');
+					}
+					
 					
 				}
 
