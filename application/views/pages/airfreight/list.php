@@ -126,7 +126,7 @@ function showContent(id){
 	$.each(content_arr,function(index,item){
 		if(item['id'] == id)
 		{
-			$('#template-content').html('<pre>' + item['content'] + '</pre>');
+			$('#template-content').html(nl2br( item['content'] ));
 			$("#template_content").modal('show');
 			return false;
 		}
